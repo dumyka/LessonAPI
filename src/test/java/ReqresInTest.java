@@ -1,6 +1,5 @@
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +29,7 @@ public class ReqresInTest {
 
   @DisplayName("Checking the number of all users")
   @Test
-  void getUsers(){
+  void getUsers() {
     given()
         .log().uri()
         .when()
