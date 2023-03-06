@@ -49,7 +49,7 @@ test {
 
 task lombok_tests(type: Test) {
     useJUnitPlatform {
-        includeTags("lombok")
+        includeTags("Lombok")
     }
     systemProperties(System.getProperties())
 }
