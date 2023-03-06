@@ -41,12 +41,14 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
     systemProperties(System.getProperties())
+    useJUnitPlatform()
+
 }
 
 task lombok_tests(type: Test) {
     useJUnitPlatform {
         includeTags("lombok")
     }
+    systemProperties(System.getProperties())
 }
