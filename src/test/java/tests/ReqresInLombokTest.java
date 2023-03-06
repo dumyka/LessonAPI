@@ -1,5 +1,6 @@
 package tests;
 
+import static io.qameta.allure.Allure.step;
 import static specs.CreateUserSpecs.createUserRequestSpec;
 import static specs.CreateUserSpecs.createUserResponseSpec;
 import static specs.DeleteUserSpecs.deletedUserRequestSpec;
@@ -36,30 +37,35 @@ public class ReqresInLombokTest {
     data.setName("morpheus");
     data.setJob("leader");
 
-    CreateUserResponseModel response = given(createUserRequestSpec)
-        .body(data)
-        .when()
-        .post("/users")
-        .then()
-        .spec(createUserResponseSpec)
-        .extract().as(CreateUserResponseModel.class);
+    CreateUserResponseModel response = step("Data entry", () ->
+        given(createUserRequestSpec)
+            .body(data)
+            .when()
+            .post("/users")
+            .then()
+            .spec(createUserResponseSpec)
+            .extract().as(CreateUserResponseModel.class));
 
-    assertThat(response.getName()).isEqualTo("morpheus");
-    assertThat(response.getJob()).isEqualTo("leader");
+    step("Checking the input data", () -> {
+      assertThat(response.getName()).isEqualTo("morpheus");
+      assertThat(response.getJob()).isEqualTo("leader");
+    });
   }
 
   @DisplayName("Checking the number of all users")
   @Test
   void getUsers() {
-    ListUserModel response = given(listUserRequestSpec)
-        .when()
-        .get("/users?page=2")
-        .then()
-        .spec(listUserResponseSpec)
-        .extract().as(ListUserModel.class);
+    ListUserModel response = step("Viewing all users", () ->
+        given(listUserRequestSpec)
+            .when()
+            .get("/users?page=2")
+            .then()
+            .spec(listUserResponseSpec)
+            .extract().as(ListUserModel.class));
 
-    assertThat(response.getTotal()).isEqualTo(12);
-
+    step("Checking the number of all users", () -> {
+      assertThat(response.getTotal()).isEqualTo(12);
+    });
   }
 
   @DisplayName("Editing the user's place of work")
@@ -70,26 +76,29 @@ public class ReqresInLombokTest {
     data.setName("morpheus");
     data.setJob("zion resident");
 
-    UpdateUserResponseModel response = given(updatedUserRequestSpec)
-        .when()
-        .patch("/users/2")
-        .then()
-        .spec(updatedUserResponseSpec)
-        .extract().as(UpdateUserResponseModel.class);
+    UpdateUserResponseModel response = step("Data entry", () ->
+        given(updatedUserRequestSpec)
+            .when()
+            .patch("/users/2")
+            .then()
+            .spec(updatedUserResponseSpec)
+            .extract().as(UpdateUserResponseModel.class));
 
-    assertThat(response.getUpdatedAt()).contains(dateTime);
-
+    step("Checking that the place of work has been edited", () -> {
+      assertThat(response.getUpdatedAt()).contains(dateTime);
+    });
   }
 
   @DisplayName("Deleting a user")
   @Test
   void deleteUser() {
-
-    given(deletedUserRequestSpec)
-        .when()
-        .delete("/users/2")
-        .then()
-        .spec(deletedUserResponseSpec);
+    step("Deleting a user", () -> {
+      given(deletedUserRequestSpec)
+          .when()
+          .delete("/users/2")
+          .then()
+          .spec(deletedUserResponseSpec);
+    });
 
   }
 
@@ -99,16 +108,18 @@ public class ReqresInLombokTest {
     LoginBodyModel data = new LoginBodyModel();
     data.setEmail("peter@klaven");
 
-    LoginErrorResponseModel response = given(loginRequestSpec)
-        .body(data)
-        .when()
-        .post("/login")
-        .then()
-        .spec(loginResponseSpec)
-        .extract().as(LoginErrorResponseModel.class);
+    LoginErrorResponseModel response = step("Data entry", () ->
+        given(loginRequestSpec)
+            .body(data)
+            .when()
+            .post("/login")
+            .then()
+            .spec(loginResponseSpec)
+            .extract().as(LoginErrorResponseModel.class));
 
-    assertThat(response.getError()).isEqualTo("Missing password");
-
+    step("Error checking", () -> {
+      assertThat(response.getError()).isEqualTo("Missing password");
+    });
   }
 }
 
