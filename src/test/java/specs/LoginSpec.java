@@ -1,4 +1,4 @@
-package Specs;
+package specs;
 
 import static helpers.CustomApiListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
@@ -10,8 +10,8 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class UpdateUserSpec {
-  public static RequestSpecification updatedUserRequestSpec = with()
+public class LoginSpec {
+  public static RequestSpecification loginRequestSpec = with()
       .log().uri()
       .log().headers()
       .log().body()
@@ -20,9 +20,9 @@ public class UpdateUserSpec {
       .baseUri("https://reqres.in")
       .basePath("/api");
 
-  public static ResponseSpecification updatedUserResponseSpec = new ResponseSpecBuilder()
+  public static ResponseSpecification loginResponseSpec = new ResponseSpecBuilder()
       .log(STATUS)
       .log(BODY)
-      .expectStatusCode(200)
+      .expectStatusCode(400)
       .build();
 }

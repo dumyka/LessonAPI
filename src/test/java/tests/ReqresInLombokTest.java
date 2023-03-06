@@ -1,15 +1,15 @@
 package tests;
 
-import static Specs.CreateUserSpecs.createUserRequestSpec;
-import static Specs.CreateUserSpecs.createUserResponseSpec;
-import static Specs.DeleteUserSpecs.deletedUserRequestSpec;
-import static Specs.DeleteUserSpecs.deletedUserResponseSpec;
-import static Specs.ListUserSpecs.listUserRequestSpec;
-import static Specs.ListUserSpecs.listUserResponseSpec;
-import static Specs.LoginSpec.loginRequestSpec;
-import static Specs.LoginSpec.loginResponseSpec;
-import static Specs.UpdateUserSpec.updatedUserRequestSpec;
-import static Specs.UpdateUserSpec.updatedUserResponseSpec;
+import static specs.CreateUserSpecs.createUserRequestSpec;
+import static specs.CreateUserSpecs.createUserResponseSpec;
+import static specs.DeleteUserSpecs.deletedUserRequestSpec;
+import static specs.DeleteUserSpecs.deletedUserResponseSpec;
+import static specs.ListUserSpecs.listUserRequestSpec;
+import static specs.ListUserSpecs.listUserResponseSpec;
+import static specs.LoginSpec.loginRequestSpec;
+import static specs.LoginSpec.loginResponseSpec;
+import static specs.UpdateUserSpec.updatedUserRequestSpec;
+import static specs.UpdateUserSpec.updatedUserResponseSpec;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 

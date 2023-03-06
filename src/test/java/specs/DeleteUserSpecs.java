@@ -1,4 +1,4 @@
-package Specs;
+package specs;
 
 import static helpers.CustomApiListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
