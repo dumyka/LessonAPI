@@ -1,5 +1,7 @@
 plugins {
     id 'java-library'
+    id 'io.qameta.allure' version '2.10.0'
+    id "io.freefair.lombok" version "6.0.0-m2"
 }
 
 group 'guru.qa'
@@ -9,10 +11,30 @@ repositories {
     mavenCentral()
 }
 
+def allureVersion = "2.19.0"
+
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
+
 dependencies {
     testImplementation(
             'org.junit.jupiter:junit-jupiter:5.8.1',
-            'io.rest-assured:rest-assured:5.3.0'
+            'io.rest-assured:rest-assured:5.3.0',
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "com.fasterxml.jackson.core:jackson-databind:2.14.2",
+            "org.assertj:assertj-core:3.24.2"
     )
 
 
@@ -20,4 +42,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
+
+task lombok_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags("lombok")
+    }
 }

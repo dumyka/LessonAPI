@@ -1,0 +1,17 @@
+{
+  "base": {
+    "logo": "",
+    "project": "RestAssured",
+    "environment": "uat",
+    "comment": "some comment",
+    "reportLink": "https://jenkins.autotests.cloud",
+    "language": "ru",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6014524073:AAEhwowmQWUFWFO59FvesJJv5STAeGf6QRY",
+    "chat": "-1001646088173",
+    "replyTo": ""
+  }
+}
